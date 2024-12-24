@@ -4,6 +4,7 @@
 #include <ctime>  
 #include <thread>  
 #include <iomanip>  
+#include <random>  // Include the random library  
 
 int main() {  
     std::ofstream logFile("fluentLog.txt", std::ios::app); // Open the file in append mode  
@@ -11,6 +12,12 @@ int main() {
         std::cerr << "Error opening file!" << std::endl;  
         return 1;  
     }  
+
+    // Create a random number generator  
+    std::random_device rd;  // Obtain a random number from hardware  
+    std::mt19937 eng(rd()); // Seed the generator  
+    std::uniform_int_distribution<> voltageDist(0, 5000); // Voltage range from 0 to 5000  
+    std::uniform_int_distribution<> currentDist(0, 100);   // Current range from 0 to 100  
 
     while (true) {  
         // Get current time  
@@ -24,9 +31,9 @@ int main() {
         std::ostringstream timeStream;  
         timeStream << std::put_time(now_tm, "%H:%M");  
 
-        // Replace these with actual voltage and current readings  
-        int voltage = 3120; // Placeholder for actual voltage  
-        int current = 10;   // Placeholder for actual current  
+        // Generate random voltage and current  
+        int voltage = voltageDist(eng); // Random voltage  
+        int current = currentDist(eng);  // Random current  
 
         // Write to file  
         logFile << dateStream.str() << "|"   
