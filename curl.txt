@@ -1,0 +1,7 @@
+curl -u "charger:Ch@rgEr@123456" -XPOST https://elstc.emapna.com/charger-log/_doc  -H 'Content-Type:application/json' -d'{
+"date": "2024.12.24",
+"time": "10:58",
+"voltage": "98765",
+"current": "9",
+"@timestamp": "2024-12-24T11:40:50.079Z"
+}'
